@@ -10,3 +10,6 @@ Template: x
 
 */
 
+#top > header > div > div.x-navbar.x-navbar-fixed-top {
+	background: linear-gradient( 0deg, #100f0d, #313131 );
+}
