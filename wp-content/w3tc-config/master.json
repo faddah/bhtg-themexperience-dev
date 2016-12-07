@@ -278,9 +278,9 @@
         ""
     ],
     "cdn.configuration_overloaded": false,
-    "cdn.enabled": "0",
+    "cdn.enabled": "1",
     "cdn.debug": "0",
-    "cdn.engine": "maxcdn",
+    "cdn.engine": "mirror",
     "cdn.uploads.enable": "1",
     "cdn.includes.enable": "1",
     "cdn.includes.files": "*.css;*.js;*.gif;*.png;*.jpg;*.xml",

@@ -1,0 +1,1 @@
+a÷nX<?php exit; ?>0
