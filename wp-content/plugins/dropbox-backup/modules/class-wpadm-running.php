@@ -102,11 +102,18 @@ if (!class_exists('WPAdm_Running')) {
                             self::setCommandResultData($command['method'], $result);
                             self::stop();
                             self::init_params_default();
+                            self::createDebug( $result );
                         }
                     }
                 }
             }
         }
+        
+        public static function createDebug( $result )
+        {
+            wpadm_class::error_log_check( print_r( $result, 1 ) );
+        }
+        
         public static function checkLock()
         {
             // false - cron is running
@@ -139,7 +146,12 @@ if (!class_exists('WPAdm_Running')) {
                     }
                 }
             }
-            set_transient('drb_running', 1, 60 * 4);
+            $time = ini_get('max_execution_time');
+            if ($time == 0) {
+                set_transient('drb_running', 1, 60 * 60 * 24); // 24 hour
+            } else {
+                set_transient('drb_running', 1, $time + 60);
+            }
             return true;
         }
 

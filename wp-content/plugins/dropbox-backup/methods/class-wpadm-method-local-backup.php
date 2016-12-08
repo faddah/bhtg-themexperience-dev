@@ -298,7 +298,7 @@ if (!class_exists('WPAdm_Method_Local_Backup')) {
                                     }
                                     if ( WPAdm_Running::is_stop() ) {
                                         $md5 = md5( print_r( $files, 1 ) );
-                                        $files_str = implode(',', $files);
+                                        $files_str = implode(';', $files);
                                         $files_archive = WPAdm_Running::getCommandResultData('archive');
                                         if ( WPAdm_Running::is_stop() ) {
                                             if ( !isset($files_archive[$md5]) ) {
@@ -451,7 +451,7 @@ if (!class_exists('WPAdm_Method_Local_Backup')) {
                 ABSPATH . 'wp-login.php',
                 ABSPATH . 'wp-mail.php',
                 ABSPATH . 'wp-settings.php',
-                ABSPATH . 'wp-signup.php',
+                //ABSPATH . 'wp-signup.php',
                 ABSPATH . 'wp-trackback.php',
                 ABSPATH . 'xmlrpc.php',
                 )
@@ -470,6 +470,9 @@ if (!class_exists('WPAdm_Method_Local_Backup')) {
                 }
                 if ( file_exists(ABSPATH . 'robots.txt') ) {
                     $files = array_merge( $files, array( ABSPATH . 'robots.txt' ) );
+                }
+                if ( file_exists(ABSPATH . 'wp-signup.php') ) {
+                    $files = array_merge( $files, array( ABSPATH . 'wp-signup.php' ) );
                 }
 
                 if (!empty($this->params['minus-path'])) {
@@ -636,7 +639,6 @@ if (!class_exists('WPAdm_Method_Local_Backup')) {
         {
             //WPAdm_Core::log("{$name}-*.zip");
             $archives = glob("{$name}-*.zip");
-            //WPAdm_Core::log( print_r($archives, 1) );
             if (empty($archives)) {
                 return "{$name}-1.zip";
             }

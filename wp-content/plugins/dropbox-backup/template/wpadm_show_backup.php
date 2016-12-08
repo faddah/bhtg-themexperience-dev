@@ -441,8 +441,8 @@
                 },
                 error: function(jqXHR, textStatus, errorThrown){
                     if (jqXHR.status != 0) {
-                        processStop();              
-                        AjaxAlert(jqXHR, textStatus, errorThrown);
+                        //processStop();              
+                        //AjaxAlert(jqXHR, textStatus, errorThrown);
                     }
                 },
             });
@@ -870,7 +870,7 @@
                         location.reload();
                     }, 
                     error: function( jqXHR, textStatus, errorThrown ){ 
-                        AjaxAlert(jqXHR, textStatus, errorThrown);
+                        //AjaxAlert(jqXHR, textStatus, errorThrown);
                     }
                 });
             }
@@ -906,6 +906,18 @@
             } else {
                 jQuery('#form-ajax-ftp-email').hide('slow');
             }
+        }
+
+        function showEnableCron()
+        {
+            jQuery('#wp-cron-enable').arcticmodal({
+                beforeOpen: function(data, el) {
+                    jQuery('#wp-cron-enable').css('display','block');
+                },
+                afterClose: function(data, el) {
+                    jQuery('#wp-cron-enable').css('display','none');
+                }
+            });
         }
         <?php 
             $command_running = get_transient('running_command');
@@ -944,7 +956,7 @@
         });  
     </script>
     <?php if (!empty($error)) {
-            echo '<div class="error" style="text-align: center; color: red; font-weight:bold;">
+            echo '<div class="error" style="text-align: left; color: red; font-weight:bold;background:#ffcece;">
             <p style="font-size: 16px;">
             ' . $error . '
             </p></div>'; 
@@ -955,6 +967,13 @@
             ' . $msg . '
             </p></div>'; 
     }?>
+    
+    <div id="wp-cron-enable" style="display: none;">
+        <div class="close-button"><a href="javascript:void(0)" onclick="jQuery('#wp-cron-enable').arcticmodal('close');"><img src="<?php echo plugins_url('/img/closebox.png', dirname(__FILE__));?>" alt=""></a></div>
+        <div class="image-enable">
+            <img src="<?php echo plugins_url('/img/how-to-enable-cron.png', dirname(__FILE__));?>" alt="">
+        </div>
+    </div>
     <div id="is-dropbox-auth" style="display: none; width: 380px; text-align: center; background: #fff; border: 2px solid #dde4ff; border-radius: 5px;">
         <div class="title-description" style="font-size: 20px; text-align: center;padding-top:45px; line-height: 30px;">
             <?php _e('Your Dropbox account must be connected before backup to Dropbox.', 'dropbox-backup'); ?> <br />

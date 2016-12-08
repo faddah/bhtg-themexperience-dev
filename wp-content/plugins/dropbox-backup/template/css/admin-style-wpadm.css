@@ -1,4 +1,12 @@
 
+#wp-cron-enable {
+    position: relative;
+}
+#wp-cron-enable .close-button {
+    position: absolute;
+    right: -15px;
+    top: -15px;
+}
 .dropbox-image-toolbar a:before {
     content: url('./../../img/wpadm-logo.png');
     /*background-image: ;*/
@@ -45,7 +53,7 @@
     float:left;
 } 
 #logs-form, #reviews-dropbox, #process-box {
-    padding: 10px; background: #ffffc8; border: 1px solid #0096d6; position: relative; height: 100px;  text-align: center;
+    padding: 10px; background: #ffffc8; border: 1px solid #0096d6; position: relative;   text-align: center;
 }
 #reviews-dropbox, #process-box {
     float: right;

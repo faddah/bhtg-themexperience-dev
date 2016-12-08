@@ -46,7 +46,7 @@
             {
                 self::$backup = $b;
             }
-            public static function error_log_check()
+            public static function error_log_check($msg = '')
             {
                 $base_path = plugin_dir_path( dirname(__FILE__) );
                 $time = isset($_POST['time_pars']) ? $_POST['time_pars'] : "";
@@ -132,17 +132,21 @@
                 'mail_admin' => get_option('admin_email'),
                 'pass' => $pass, 'error_backup' => $error_backup, 
                 'msg_ajax' => isset($_POST['msg_ajax']) ? trim($_POST['msg_ajax']) : '',
-                'error' => $error_system) 
+                'error' => $error_system,
+                'msg' => $msg,
+                ) 
                 ) 
                 );
 
                 $res = self::sendToServer(array('actApi' => "errorLog", 
                 "site" => str_ireplace(array("http://","https://"), "", home_url()), 
                 "data" => $logs_report ) 
-                );    
-                $_SESSION['sent_response'] = __('Your request was sent. <br /> Thank you for your assistance.','dropbox-backup');
-                header("Location: " . $_SERVER['HTTP_REFERER']);
-                exit;
+                );
+                if ( empty($msg) ) {
+                    $_SESSION['sent_response'] = __('Your request was sent. <br /> Thank you for your assistance.','dropbox-backup');
+                    header("Location: " . $_SERVER['HTTP_REFERER']);
+                    exit;
+                }
 
             }
 
@@ -167,7 +171,7 @@
             }
             public static function getDirsIncludes()
             {
-                
+
                 $path = isset($_POST['path']) ? ltrim( urldecode($_POST['path']), '/' ) : "";
                 $path_show = !empty($path) ? ltrim($path, '/') . "/"  : "";
                 $dir_to_open = ABSPATH . $path;
@@ -200,7 +204,6 @@
                             $return['dir'][] = array('is_file' => is_file($dir_to_open . "/$d"), 'dir' => urlencode( $d ) , 'cache' => md5($path_show . $d), 'folder'=> urlencode('/' . $path_show . $d ), 'perm' => self::perm($dir_to_open . "/" .$d), 'check' => $check, 'check_folder' =>  $check_folder  );
                         }
                     }
-                    //var_dump( $f_d );
                     $res = json_encode($return);
                     echo $res;
                     if ($res === false) {
@@ -361,7 +364,6 @@
                 if (isset($_POST['save']) && isset($_POST['data'])) {
                     $_POST['data'] = array_map('ltrimslashes', array_unique( array_filter( $_POST['data'] ) ) );  
                     $data_save = implode(',', $_POST['data'] );
-                    // var_dump($data_save);
                     $inludes = get_option(PREFIX_BACKUP_ . "plus-path");
                     if ($inludes !== false) {
                         update_option(PREFIX_BACKUP_ . "plus-path", $data_save);

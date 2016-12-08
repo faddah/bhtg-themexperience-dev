@@ -218,7 +218,6 @@ if (!class_exists('WPAdm_Mysqldump')) {
                                                 if ( WPAdm_Running::is_stop() ) {
                                                     $return = ''; 
                                                     $row = array_values( get_object_vars( $result2[$i] ) );
-                                                    //WPAdm_Core::log('row' . print_r($row, 1));
                                                     $rows_num = count($row);
                                                     if ($rows_num > 0) {
                                                         $return.= 'INSERT INTO ' . $table . ' VALUES(';

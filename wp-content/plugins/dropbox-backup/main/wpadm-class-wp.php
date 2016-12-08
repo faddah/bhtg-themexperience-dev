@@ -271,9 +271,9 @@
                 WPAdm_Running::init_params_default();
                 $res['result'] = 'success';
                 if (defined('DISABLE_WP_CRON')) {  
-                    if (DISABLE_WP_CRON === true) { 
+                    if (DISABLE_WP_CRON === true || DISABLE_WP_CRON == 'true') { 
                         $res['result'] = 'error';
-                        $res['error'] = __('please enable cron-tasks on your website.','dropbox-backup'); //. '<br /><a href="" target="_blank">' . __('How to enable cron-tasks on my website?','dropbox-backup') . '</a>';
+                        $res['error'] = __('Please enable cron-tasks on your website.','dropbox-backup') . '<br /><br /><a href="javascript:void(0)" onclick="showEnableCron();" >' . __('How to enable cron-tasks on my website?','dropbox-backup') . '</a><br /><br />';
                         $res['data'] = array();
                         $res['size'] = 0;
                     }
@@ -672,9 +672,9 @@
                     }
 
                     if (defined('DISABLE_WP_CRON')) {
-                        if (DISABLE_WP_CRON === true) {
+                        if (DISABLE_WP_CRON === true || DISABLE_WP_CRON == 'true') {
                             $res['result'] = 'error';
-                            $res['error'] = __('please enable cron-task of your website.','dropbox-backup');
+                            $res['error'] = __('Please enable cron-tasks on your website.','dropbox-backup') . '<br /><br /><a href="javascript:void(0)" onclick="showEnableCron();" >' . __('How to enable cron-tasks on my website?','dropbox-backup') . '</a><br /><br />';
                             $res['data'] = array();
                             $res['size'] = 0;
                             $send_to_dropbox = false;
@@ -768,7 +768,6 @@
                         $folder_project = self::getNameProject();
                         //$dropbox->uploadFile(dirname(__FILE__) . "/index.php", $folder_project . '/index.php', true);
                         // $res = $dropbox->downloadFile("localhost_wp_dropbox/localhost_wp_dropbox-full-2016_06_07_14_05/localhost_wp_dropbox-full-2016_06_07_14_05.md5", DROPBOX_BACKUP_DIR_BACKUP . "/localhost_wp_dropbox-full-2016_06_07_14_05.md5");
-                        //var_dump($res);
                         $backups = $dropbox->listing($folder_project);
                         $n = count($backups['items']);
                         $data['data'] = array();

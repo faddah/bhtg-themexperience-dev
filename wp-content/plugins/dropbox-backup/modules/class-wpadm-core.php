@@ -88,7 +88,7 @@ if (!class_exists('WPAdm_Core')) {
             if (!file_exists($tmp_dir . '/index.php')) {
                 @file_put_contents($tmp_dir . '/index.php', '');
                 if (!file_exists($tmp_dir . '/index.php')) {
-                    self::$error = ( sprintf( __('Failed to create a file, please check the permissions on the folders "%s".<br /> Plugin is working incorrectly.', 'dropbxo-backup'), $tmp_dir ) );
+                    self::$error = ( sprintf( __('Backup creating<br /><br />Please check the permissions on folder "%s".<br />Failed to create folder.', 'dropbxo-backup'), $tmp_dir ) );
                 }
             }
             return $tmp_dir;
@@ -224,12 +224,12 @@ if (!class_exists('WPAdm_Core')) {
             if(!file_exists($dir)) {
                 @mkdir($dir, 0755);
                 if (!is_dir($dir)) {
-                    self::$error = str_replace("&s", $dir, __('Failed to create a file, please check the permissions on the folders "&s".','dropbox-backup') );
+                    self::$error = str_replace("&s", $dir, __('Backup creating<br /><br />Please check the permissions on folder "&s". Failed to create folder.','dropbox-backup') );
                 } else {
                     //todo: права доступа
                     @file_put_contents($dir . '/index.php', '<?php echo "Hello World!"; ');
                     if ( !is_writable($dir . '/index.php') ) {
-                        self::$error = str_replace("&s", $dir, __('Failed to create a file, please check the permissions on the folders "&s".','dropbox-backup') );
+                        self::$error = str_replace("&s", $dir . '/index.php' , __('Backup creating<br /><br />Please check the permissions on file "&s". Failed to create file.','dropbox-backup') );
                     }
                 }
             }

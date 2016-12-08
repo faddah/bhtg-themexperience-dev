@@ -2,6 +2,10 @@
 if (!defined('PCLZIP_TEMPORARY_DIR')) {
     define('PCLZIP_TEMPORARY_DIR', WPAdm_Core::getTmpDir() . '/');
 }
+
+if (!defined('PCLZIP_SEPARATOR')) {
+    define('PCLZIP_SEPARATOR', ';');
+}
 if ( !class_exists("PclZip") ) {
     require_once dirname(__FILE__) . '/pclzip.lib.php';
 }
